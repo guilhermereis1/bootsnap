@@ -1,0 +1,27 @@
+language: ruby
+sudo: false
+
+os:
+  - linux
+  - osx
+
+rvm:
+  - ruby-2.4
+  - ruby-2.5
+  - ruby-head
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+  include:
+    - rvm: jruby
+      os: linux
+      env: MINIMAL_SUPPORT=1
+    # Truffle 1.0.0-rc12 should be able to pass:
+    # https://github.com/oracle/truffleruby/issues/1400#issuecomment-456166426
+    # It will be release early Feb 2019
+    # - rvm: truffleruby
+    #   os: linux
+    #   env: MINIMAL_SUPPORT=1
+
+script: bin/ci
